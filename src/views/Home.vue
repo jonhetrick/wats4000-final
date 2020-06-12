@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- <HelloWorld msg="Welcome to Astro Tracker!" /> -->
-    <h1>Astro Tracker</h1>
+    <h1 class="title">Astro Tracker</h1>
     <div class="search-box">
       <input
         type="text"
@@ -58,6 +58,10 @@ export default {
 </script>
 
 <style scoped>
+.title {
+  padding-top: 110px;
+}
+
 h1,
 h2,
 h3,

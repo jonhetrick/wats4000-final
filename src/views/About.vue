@@ -1,6 +1,6 @@
 .<template>
   <div>
-    <h1>About us:</h1>
+    <h1 class="title">About us:</h1>
     <p>
       Photography enthusiasts love chasing the night skies, in hopes to track
       down and capture a moment of the unknown.
@@ -27,6 +27,10 @@ export default {};
 <style scoped>
 * {
   color: whitesmoke;
-  padding: 10px 25px;
+  padding: 0px 50px;
+}
+
+.title {
+  padding-top: 110px;
 }
 </style>

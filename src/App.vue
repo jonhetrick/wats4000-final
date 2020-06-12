@@ -22,7 +22,7 @@
   text-align: center;
   color: #2c3e50;
 
-  background-image: url("./assets/night_sky.jpg");
+  background-image: url("./assets/nightskyanimated.png");
   background-size: cover;
   background-position: bottom;
   transition: 0.4s;
@@ -32,7 +32,7 @@
 }
 
 #nav {
-  padding: 30px;
+  padding-top: 5px;
 }
 
 #nav a {
