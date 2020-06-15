@@ -10,12 +10,30 @@
         placeholder="Search for a City..."
         @keypress="getWeather"
       />
-      <h2>Results:</h2>
-      <ul class="matches" v-if="results && results.list.length > 0">
-        <li class="gps" v-for="(cityMatch, index) in results.list" :key="index">
+      <h2 v-if="weatherData" class="results">Results:</h2>
+      <ul class="matches" v-if="weatherData && weatherData.list.length > 0">
+        <li
+          class="gps"
+          v-for="(cityMatch, index) in weatherData.list"
+          :key="index"
+        >
           <h2>{{ cityMatch.name }}, {{ cityMatch.sys.country }}</h2>
-          <p>Latitude & Longitude:</p>
-          <b>{{ cityMatch.coord.lat }}, {{ cityMatch.coord.lon }}</b>
+          <!-- <p>Latitude & Longitude:</p>
+          <b>{{ cityMatch.coord.lat }}, {{ cityMatch.coord.lon }}</b> -->
+          <p>
+            <router-link
+              class="nav"
+              v-bind:to="{
+                name: 'CurrentWeather',
+                params: {
+                  cityId: cityMatch.id,
+                  lat: cityMatch.coord.lat,
+                  lng: cityMatch.coord.lon
+                }
+              }"
+              >View Details</router-link
+            >
+          </p>
         </li>
       </ul>
     </div>
@@ -30,14 +48,14 @@ export default {
   name: "Home",
   data() {
     return {
-      results: null,
+      weatherData: null,
       query: ""
     };
   },
   components: {},
   methods: {
     getWeather: function(e) {
-      this.results = null;
+      this.weatherData = null;
 
       if (e.key === "Enter") {
         API.get("find", {
@@ -46,9 +64,10 @@ export default {
           }
         })
           .then(response => {
-            this.results = response.data;
+            this.weatherData = response.data;
           })
           .catch(error => {
+            console.log(error);
             this.errors = error;
           });
       }
@@ -60,6 +79,15 @@ export default {
 <style scoped>
 .title {
   padding-top: 110px;
+}
+
+.results {
+  padding-top: 100px;
+}
+
+.nav {
+  font-weight: bold;
+  color: whitesmoke;
 }
 
 h1,
@@ -104,11 +132,11 @@ h5 {
   padding: 10px 25px;
   color: #fff;
   font-size: 20px;
-  font-weight: 500;
-  text-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  font-weight: 400;
+  text-shadow: 1px 3px rgba(0, 0, 0, 0.25);
   background-color: rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
+  border-radius: 40px;
   margin: 30px 0px;
-  box-shadow: 3px 6px rgba(0, 0, 0, 0.25);
+  box-shadow: 2px 6px rgba(0, 0, 0, 0.25);
 }
 </style>
